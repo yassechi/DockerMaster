@@ -6,6 +6,8 @@ services:
       - "80:80"
     volumes:
       - ./web:/usr/share/nginx/html
+    networks:
+      - front-net
 
 
   api:
@@ -22,6 +24,9 @@ services:
       - DB_PASSWORD=root
     depends_on:
       - db
+    networks:
+      - front-net
+      - back-net
 
 
   db:
@@ -35,8 +40,15 @@ services:
       - POSTGRES_USER=yass
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=tajinedb
+    networks:
+      - back-net
 
 volumes:
   mydata:
+
+networks:
+  front-net:
+  back-net:
+
 
 
