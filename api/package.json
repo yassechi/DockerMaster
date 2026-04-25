@@ -1,7 +1,7 @@
 {
-  "name": "tajine-api",
+  "name": "docker-master",
   "version": "1.0.0",
-  "description": "API Express pour le projet Maison Tajine.",
+  "description": "projet basic pour apprendre docker.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
@@ -15,7 +15,7 @@
     "api",
     "express"
   ],
-  "author": "",
+  "author": "yassine",
   "license": "MIT",
   "engines": {
     "node": ">=18"

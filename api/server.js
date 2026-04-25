@@ -4,14 +4,14 @@ const morgan = require("morgan");
 const { Pool } = require("pg");
 
 const app = express();
-const PORT = 3001;
+const PORT = Number(process.env.PORT || 3001);
 
 const dbConfig = {
-  host: "localhost",
-  port: 5432,
-  database: "tajinedb",
-  user: "yass",
-  password: "root"
+  host: process.env.DB_HOST || "localhost",
+  port: Number(process.env.DB_PORT || 5432),
+  database: process.env.DB_NAME || "tajinedb",
+  user: process.env.DB_USER || "yass",
+  password: process.env.DB_PASSWORD || "root"
 };
 
 const pool = new Pool({
