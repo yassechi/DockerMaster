@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Maison Tajine, une page food chaleureuse et premium autour de la cuisine marocaine."
+    >
+    <title>Maison Tajine | Cuisine marocaine</title>
+    <style>
+        :root {
+            --bg: #f5ead8;
+            --bg-deep: #ead4b3;
+            --panel: rgba(94, 45, 24, 0.08);
+            --panel-strong: rgba(94, 45, 24, 0.13);
+            --text: #2b160d;
+            --muted: #6a4a39;
+            --saffron: #cc7a1c;
+            --paprika: #a33e21;
+            --olive: #59663c;
+            --cream: #fff6e8;
+            --white: #fffdf9;
+            --line: rgba(43, 22, 13, 0.12);
+            --shadow: 0 24px 60px rgba(62, 30, 15, 0.14);
+            --radius-xl: 34px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --max-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(204, 122, 28, 0.26), transparent 30%),
+                radial-gradient(circle at 80% 18%, rgba(163, 62, 33, 0.16), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(89, 102, 60, 0.18), transparent 28%),
+                linear-gradient(140deg, #f8efdf 0%, #f1e0c3 48%, #f4eadb 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(circle at center, black 36%, transparent 90%);
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .page-shell {
+            width: min(var(--max-width), calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(18px);
+            background: rgba(248, 239, 223, 0.72);
+            border-bottom: 1px solid rgba(43, 22, 13, 0.08);
+        }
+
+        .topbar-inner {
+            width: min(var(--max-width), calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--paprika), var(--saffron));
+            box-shadow: 0 12px 25px rgba(163, 62, 33, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.35rem;
+            width: 100%;
+            height: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            background: linear-gradient(90deg, var(--paprika), var(--saffron));
+            transition: transform 180ms ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        .nav-cta {
+            padding: 0.8rem 1.15rem;
+            border-radius: 999px;
+            color: var(--white);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--paprika), #bf6e2f);
+            box-shadow: 0 16px 30px rgba(163, 62, 33, 0.2);
+        }
+
+        .hero {
+            position: relative;
+            padding: 4.5rem 0 2.75rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--paprika);
+            background: rgba(255, 246, 232, 0.85);
+            border: 1px solid rgba(163, 62, 33, 0.12);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--paprika), var(--saffron));
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            line-height: 0.95;
+        }
+
+        h1 {
+            margin-top: 1rem;
+            font-size: clamp(3.3rem, 8vw, 6.6rem);
+            letter-spacing: -0.04em;
+            max-width: 10ch;
+        }
+
+        .hero-copy p {
+            max-width: 58ch;
+            margin: 1.4rem 0 0;
+            font-size: 1.08rem;
+            line-height: 1.75;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            min-height: 52px;
+            padding: 0.95rem 1.35rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-weight: 700;
+            transition:
+                transform 180ms ease,
+                box-shadow 180ms ease,
+                background 180ms ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--paprika), var(--saffron));
+            box-shadow: 0 16px 28px rgba(163, 62, 33, 0.22);
+        }
+
+        .button-secondary {
+            color: var(--text);
+            border-color: rgba(43, 22, 13, 0.12);
+            background: rgba(255, 253, 249, 0.72);
+        }
+
+        .hero-meta {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.9rem;
+        }
+
+        .meta-card {
+            padding: 1rem 1rem 1.1rem;
+            border-radius: var(--radius-md);
+            background: rgba(255, 250, 243, 0.72);
+            border: 1px solid rgba(43, 22, 13, 0.08);
+            box-shadow: 0 12px 25px rgba(62, 30, 15, 0.06);
+        }
+
+        .meta-card strong {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-size: 1.1rem;
+        }
+
+        .meta-card span {
+            color: var(--muted);
+            font-size: 0.94rem;
+            line-height: 1.45;
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: 620px;
+            display: grid;
+            place-items: center;
+        }
+
+        .hero-visual::before,
+        .hero-visual::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(4px);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-visual::before {
+            width: 320px;
+            height: 320px;
+            top: 1.5rem;
+            right: 2rem;
+            background: radial-gradient(circle, rgba(204, 122, 28, 0.28) 0%, transparent 72%);
+        }
+
+        .hero-visual::after {
+            width: 240px;
+            height: 240px;
+            left: 0;
+            bottom: 4rem;
+            background: radial-gradient(circle, rgba(89, 102, 60, 0.22) 0%, transparent 72%);
+            animation-delay: -2s;
+        }
+
+        .showcase {
+            position: relative;
+            width: min(100%, 500px);
+            aspect-ratio: 0.92;
+            border-radius: calc(var(--radius-xl) + 10px);
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(255, 248, 233, 0.95), rgba(234, 212, 179, 0.78)),
+                linear-gradient(145deg, rgba(163, 62, 33, 0.12), rgba(204, 122, 28, 0.05));
+            border: 1px solid rgba(43, 22, 13, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .showcase::before {
+            content: "";
+            position: absolute;
+            inset: 1.2rem;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .plate {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow:
+                inset 0 0 0 14px rgba(255, 251, 244, 0.55),
+                0 20px 35px rgba(62, 30, 15, 0.15);
+        }
+
+        .plate-main {
+            width: 290px;
+            height: 290px;
+            top: 105px;
+            left: 105px;
+            background:
+                radial-gradient(circle at 50% 42%, #9e4d26 0 22%, #7a2f16 23% 25%, transparent 26%),
+                radial-gradient(circle at 35% 38%, #f0a23b 0 7%, transparent 8%),
+                radial-gradient(circle at 64% 36%, #f8d47a 0 8%, transparent 9%),
+                radial-gradient(circle at 33% 64%, #7d8c44 0 10%, transparent 11%),
+                radial-gradient(circle at 64% 64%, #b74120 0 11%, transparent 12%),
+                radial-gradient(circle at center, #cc7a1c 0 57%, #a55d1a 58% 64%, #6d391a 65% 100%);
+            animation: drift 6s ease-in-out infinite;
+        }
+
+        .plate-small {
+            width: 132px;
+            height: 132px;
+            right: 52px;
+            top: 74px;
+            background:
+                radial-gradient(circle at 50% 50%, #f0c267 0 28%, #a33e21 29% 42%, #6f2c17 43% 100%);
+            animation: drift 7s ease-in-out infinite;
+            animation-delay: -1.5s;
+        }
+
+        .plate-accent {
+            width: 110px;
+            height: 110px;
+            left: 52px;
+            bottom: 72px;
+            background:
+                radial-gradient(circle at 50% 46%, #7b8d45 0 30%, #4f5c33 31% 42%, #f8ead4 43% 100%);
+            animation: drift 7.5s ease-in-out infinite;
+            animation-delay: -2s;
+        }
+
+        .floating-card {
+            position: absolute;
+            padding: 1rem 1.1rem;
+            border-radius: 18px;
+            background: rgba(255, 252, 246, 0.88);
+            border: 1px solid rgba(43, 22, 13, 0.08);
+            box-shadow: 0 18px 35px rgba(62, 30, 15, 0.12);
+            backdrop-filter: blur(12px);
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 0.94rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .floating-card span {
+            display: block;
+            font-size: 0.9rem;
+            line-height: 1.45;
+            color: var(--muted);
+        }
+
+        .floating-card.top {
+            top: 28px;
+            left: 24px;
+            max-width: 210px;
+        }
+
+        .floating-card.bottom {
+            right: 20px;
+            bottom: 24px;
+            max-width: 220px;
+        }
+
+        .floating-pill {
+            position: absolute;
+            top: 250px;
+            right: -16px;
+            padding: 0.8rem 1rem;
+            border-radius: 999px;
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, var(--olive), #819059);
+            box-shadow: 0 18px 35px rgba(89, 102, 60, 0.2);
+        }
+
+        section {
+            padding: 2.75rem 0;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2.3rem, 4vw, 4rem);
+            letter-spacing: -0.04em;
+            max-width: 9ch;
+        }
+
+        .section-heading p {
+            max-width: 48ch;
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.2rem;
+        }
+
+        .signature-card {
+            position: relative;
+            min-height: 330px;
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(43, 22, 13, 0.08);
+            box-shadow: var(--shadow);
+            isolation: isolate;
+        }
+
+        .signature-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .signature-card::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 65%;
+            z-index: -1;
+            background: linear-gradient(180deg, transparent, rgba(28, 14, 8, 0.8));
+        }
+
+        .signature-card.card-one::before {
+            background:
+                radial-gradient(circle at 68% 24%, rgba(255, 236, 190, 0.5), transparent 16%),
+                linear-gradient(145deg, rgba(204, 122, 28, 0.85), rgba(94, 45, 24, 0.92));
+        }
+
+        .signature-card.card-two::before {
+            background:
+                radial-gradient(circle at 20% 18%, rgba(255, 246, 220, 0.45), transparent 20%),
+                linear-gradient(145deg, rgba(89, 102, 60, 0.88), rgba(43, 22, 13, 0.92));
+        }
+
+        .signature-card.card-three::before {
+            background:
+                radial-gradient(circle at 82% 18%, rgba(255, 227, 175, 0.48), transparent 18%),
+                linear-gradient(145deg, rgba(163, 62, 33, 0.9), rgba(69, 31, 19, 0.95));
+        }
+
+        .signature-card .card-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .signature-card h3 {
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 0.7rem;
+        }
+
+        .signature-card p {
+            margin: 0;
+            color: rgba(255, 251, 245, 0.82);
+            line-height: 1.65;
+        }
+
+        .signature-card .price {
+            margin-top: 1rem;
+            display: inline-flex;
+            align-self: start;
+            padding: 0.55rem 0.8rem;
+            border-radius: 999px;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.15);
+            font-weight: 700;
+        }
+
+        .menu-layout {
+            display: grid;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 1.2rem;
+        }
+
+        .menu-board,
+        .story-panel,
+        .booking-panel,
+        .info-panel,
+        .table-panel {
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(43, 22, 13, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .menu-board {
+            padding: 1.6rem;
+            background: rgba(255, 252, 246, 0.84);
+        }
+
+        .menu-columns {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem 1.4rem;
+        }
+
+        .menu-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .menu-item:last-child,
+        .menu-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+
+        .menu-item-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-header strong {
+            font-size: 1.08rem;
+            line-height: 1.3;
+        }
+
+        .menu-item-header span {
+            font-weight: 700;
+            color: var(--paprika);
+            white-space: nowrap;
+        }
+
+        .menu-item p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .story-panel {
+            position: relative;
+            overflow: hidden;
+            padding: 1.7rem;
+            background:
+                radial-gradient(circle at top right, rgba(204, 122, 28, 0.18), transparent 28%),
+                linear-gradient(155deg, rgba(89, 102, 60, 0.98), rgba(51, 59, 35, 0.97));
+            color: var(--white);
+        }
+
+        .story-panel::before {
+            content: "";
+            position: absolute;
+            inset: 1rem;
+            border-radius: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            pointer-events: none;
+        }
+
+        .story-panel h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .story-panel p {
+            margin: 0;
+            color: rgba(255, 250, 242, 0.82);
+            line-height: 1.75;
+        }
+
+        .story-list {
+            margin: 1.5rem 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .story-list li {
+            padding: 1rem 1rem 1rem 1.1rem;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .story-list strong {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .experience {
+            display: grid;
+            grid-template-columns: 0.92fr 1.08fr;
+            gap: 1.2rem;
+        }
+
+        .booking-panel {
+            padding: 1.6rem;
+            background:
+                linear-gradient(160deg, rgba(163, 62, 33, 0.95), rgba(105, 42, 24, 0.98));
+            color: var(--white);
+        }
+
+        .booking-panel h2 {
+            font-size: clamp(2.2rem, 4vw, 4rem);
+            letter-spacing: -0.04em;
+            margin-bottom: 0.8rem;
+        }
+
+        .booking-panel p {
+            margin: 0 0 1.5rem;
+            color: rgba(255, 248, 240, 0.82);
+            line-height: 1.75;
+        }
+
+        .table-panel {
+            padding: 1.6rem;
+            background: rgba(255, 252, 246, 0.84);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 24px;
+            border: 1px solid rgba(43, 22, 13, 0.08);
+            background: rgba(255, 253, 249, 0.9);
+        }
+
+        .plats-table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+        }
+
+        .plats-table thead {
+            background: rgba(94, 45, 24, 0.06);
+        }
+
+        .plats-table th,
+        .plats-table td {
+            padding: 1rem 1.1rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid rgba(43, 22, 13, 0.08);
+        }
+
+        .plats-table th {
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .plats-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .plats-table td strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .plats-table td p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .table-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 72px;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--paprika);
+            background: rgba(204, 122, 28, 0.14);
+        }
+
+        .table-badge.signature {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--paprika), var(--saffron));
+        }
+
+        .table-status {
+            margin-top: 1rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .table-status.is-error {
+            color: var(--paprika);
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.9rem;
+        }
+
+        .booking-field {
+            padding: 0.9rem 1rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .booking-field small {
+            display: block;
+            margin-bottom: 0.3rem;
+            color: rgba(255, 248, 240, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .booking-field strong {
+            font-size: 1rem;
+        }
+
+        .booking-actions {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .booking-actions .button-primary {
+            background: linear-gradient(135deg, #f6d28d, #f0aa42);
+            color: #4d240f;
+            box-shadow: none;
+        }
+
+        .booking-actions .button-secondary {
+            color: var(--white);
+            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .info-panel {
+            padding: 1.6rem;
+            background: rgba(255, 252, 246, 0.84);
+        }
+
+        .info-stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .info-card {
+            padding: 1.1rem;
+            border-radius: 20px;
+            background: rgba(94, 45, 24, 0.05);
+            border: 1px solid rgba(43, 22, 13, 0.08);
+        }
+
+        .info-card strong {
+            display: block;
+            margin-bottom: 0.45rem;
+            font-size: 1rem;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .footer {
+            padding: 1.5rem 0 3rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .footer-inner {
+            width: min(var(--max-width), calc(100% - 2rem));
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            border-top: 1px solid rgba(43, 22, 13, 0.08);
+            padding-top: 1rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition:
+                opacity 700ms ease,
+                transform 700ms ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-16px);
+            }
+        }
+
+        @keyframes drift {
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(0, -10px, 0);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .topbar-inner,
+            .footer-inner {
+                width: min(var(--max-width), calc(100% - 1.4rem));
+            }
+
+            .hero-grid,
+            .menu-layout,
+            .experience,
+            .section-heading {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                display: grid;
+            }
+
+            .signature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 3rem;
+            }
+
+            .hero-visual {
+                min-height: 520px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .topbar-inner {
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
+            }
+
+            .nav-cta {
+                margin-left: auto;
+            }
+
+            .page-shell {
+                width: min(var(--max-width), calc(100% - 1.4rem));
+            }
+
+            h1 {
+                font-size: clamp(2.8rem, 16vw, 4.4rem);
+            }
+
+            .hero-meta,
+            .booking-grid,
+            .menu-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: 460px;
+            }
+
+            .showcase {
+                aspect-ratio: 0.88;
+            }
+
+            .plate-main {
+                width: 220px;
+                height: 220px;
+                top: 112px;
+                left: 78px;
+            }
+
+            .plate-small {
+                width: 108px;
+                height: 108px;
+                right: 34px;
+                top: 64px;
+            }
+
+            .plate-accent {
+                width: 94px;
+                height: 94px;
+                left: 28px;
+                bottom: 56px;
+            }
+
+            .floating-card.top {
+                max-width: 175px;
+            }
+
+            .floating-card.bottom {
+                right: 14px;
+                bottom: 18px;
+                max-width: 180px;
+            }
+
+            .floating-pill {
+                top: auto;
+                right: 20px;
+                bottom: 124px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="#accueil" aria-label="Maison Tajine">
+                <span class="brand-mark">MT</span>
+                <span>Maison Tajine</span>
+            </a>
+            <nav class="nav-links" aria-label="Navigation principale">
+                <a href="#signatures">Signatures</a>
+                <a href="#menu">Menu</a>
+                <a href="#plats-db">Plats DB</a>
+                <a href="#experience">Expérience</a>
+                <a href="#reservation">Réservation</a>
+            </nav>
+            <a class="nav-cta" href="#reservation">Table ce soir</a>
+        </div>
+    </header>
+
+    <main id="accueil">
+        <section class="hero">
+            <div class="page-shell hero-grid">
+                <div class="hero-copy reveal">
+                    <span class="eyebrow">Cuisine lente, feu vif, grande tablée</span>
+                    <h1>Le goût chaud du Maroc en plein service.</h1>
+                    <p>
+                        Une page food pensée comme une vraie vitrine de restaurant :
+                        tajines fondants, couscous généreux, épices grillées et ambiance
+                        de maison vivante. Tout est construit pour donner faim dès le
+                        premier écran.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#menu">Voir le menu</a>
+                        <a class="button button-secondary" href="#experience">Découvrir l'ambiance</a>
+                    </div>
+                    <div class="hero-meta">
+                        <article class="meta-card">
+                            <strong>12 recettes maison</strong>
+                            <span>Préparées chaque jour avec cuisson lente et produits frais.</span>
+                        </article>
+                        <article class="meta-card">
+                            <strong>Service de 19h</strong>
+                            <span>Une carte courte, soignée, pensée pour le dîner.</span>
+                        </article>
+                        <article class="meta-card">
+                            <strong>4.9/5 en salle</strong>
+                            <span>Pour l'accueil, les portions et l'ambiance conviviale.</span>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal">
+                    <div class="showcase" aria-hidden="true">
+                        <div class="plate plate-main"></div>
+                        <div class="plate plate-small"></div>
+                        <div class="plate plate-accent"></div>
+                        <div class="floating-card top">
+                            <strong>Tajine signature</strong>
+                            <span>Agneau confit, abricot rôti, amandes toastées et jus épicé.</span>
+                        </div>
+                        <div class="floating-pill">Servi brûlant</div>
+                        <div class="floating-card bottom">
+                            <strong>Dressage minute</strong>
+                            <span>Herbes fraîches, semoule légère et sauce réduite maison.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="signatures">
+            <div class="page-shell">
+                <div class="section-heading reveal">
+                    <h2>Nos assiettes qui ouvrent l'appétit.</h2>
+                    <p>
+                        Trois signatures pour donner du relief à la page : une identité forte,
+                        des couleurs gourmandes et des plats qui racontent tout de suite le
+                        positionnement du lieu.
+                    </p>
+                </div>
+
+                <div class="signature-grid">
+                    <article class="signature-card card-one reveal">
+                        <span class="card-tag">Le favori</span>
+                        <h3>Tajine Atlas</h3>
+                        <p>
+                            Agneau braisé, pruneaux fondants, cannelle, graines torréfiées et
+                            jus réduit jusqu'à l'onctuosité.
+                        </p>
+                        <span class="price">24 EUR</span>
+                    </article>
+
+                    <article class="signature-card card-two reveal">
+                        <span class="card-tag">Maison</span>
+                        <h3>Couscous Royal</h3>
+                        <p>
+                            Bouillon safrané, légumes glacés, merguez grillée, poulet rôti et
+                            semoule aérée minute.
+                        </p>
+                        <span class="price">22 EUR</span>
+                    </article>
+
+                    <article class="signature-card card-three reveal">
+                        <span class="card-tag">Croquant</span>
+                        <h3>Pastilla du soir</h3>
+                        <p>
+                            Feuilletage croustillant, volaille épicée, amande et touche sucrée
+                            salée parfaitement dosée.
+                        </p>
+                        <span class="price">18 EUR</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu">
+            <div class="page-shell menu-layout">
+                <div class="menu-board reveal">
+                    <div class="section-heading">
+                        <h2>Le menu du service.</h2>
+                        <p>
+                            Une composition simple et lisible pour une page de restaurant :
+                            peu de plats, de belles descriptions et des prix faciles à repérer.
+                        </p>
+                    </div>
+
+                    <div class="menu-columns">
+                        <div>
+                            <article class="menu-item">
+                                <div class="menu-item-header">
+                                    <strong>Briouates dorées</strong>
+                                    <span>9 EUR</span>
+                                </div>
+                                <p>Fromage frais, herbes, miel pimenté et graines de sésame.</p>
+                            </article>
+                            <article class="menu-item">
+                                <div class="menu-item-header">
+                                    <strong>Harira de la maison</strong>
+                                    <span>8 EUR</span>
+                                </div>
+                                <p>Soupe veloutée aux lentilles, pois chiches et tomates confites.</p>
+                            </article>
+                            <article class="menu-item">
+                                <div class="menu-item-header">
+                                    <strong>Tajine citron olives</strong>
+                                    <span>23 EUR</span>
+                                </div>
+                                <p>Poulet fermier, citron confit, olives vertes et sauce brillante.</p>
+                            </article>
+                        </div>
+
+                        <div>
+                            <article class="menu-item">
+                                <div class="menu-item-header">
+                                    <strong>Tajine kefta</strong>
+                                    <span>21 EUR</span>
+                                </div>
+                                <p>Boulettes épicées, oeufs coulants et tomate mijotée lentement.</p>
+                            </article>
+                            <article class="menu-item">
+                                <div class="menu-item-header">
+                                    <strong>Semoule safranée</strong>
+                                    <span>7 EUR</span>
+                                </div>
+                                <p>Accompagnement beurré léger, zeste d'orange et herbes fraîches.</p>
+                            </article>
+                            <article class="menu-item">
+                                <div class="menu-item-header">
+                                    <strong>Orange cannelle</strong>
+                                    <span>8 EUR</span>
+                                </div>
+                                <p>Agrumes frais, sirop parfumé, fleur d'oranger et pistaches.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="story-panel reveal">
+                    <h3>Une direction visuelle qui sent les épices.</h3>
+                    <p>
+                        Les tons paprika, safran et olive créent une ambiance chaleureuse,
+                        pendant que les formes arrondies rappellent les plats de service et les
+                        tablées généreuses.
+                    </p>
+                    <ul class="story-list">
+                        <li>
+                            <strong>Couleurs gourmandes</strong>
+                            Elles installent tout de suite l'univers food sans tomber dans un rendu générique.
+                        </li>
+                        <li>
+                            <strong>Hiérarchie claire</strong>
+                            Le hero donne faim, les cartes rassurent, puis la réservation convertit.
+                        </li>
+                        <li>
+                            <strong>Mobile inclus</strong>
+                            Les blocs passent proprement en colonne pour rester lisibles sur téléphone.
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <section id="plats-db">
+            <div class="page-shell">
+                <div class="table-panel reveal">
+                    <div class="section-heading">
+                        <h2>Les plats ramenes depuis l'API.</h2>
+                        <p>
+                            Ce tableau se remplit au chargement a partir de l'API, et
+                            l'API lit elle-meme les plats directement depuis Postgres.
+                        </p>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="plats-table">
+                            <thead>
+                                <tr>
+                                    <th>Plat</th>
+                                    <th>Viande</th>
+                                    <th>Prix</th>
+                                    <th>Piment</th>
+                                    <th>Signature</th>
+                                </tr>
+                            </thead>
+                            <tbody id="plats-table-body">
+                                <tr>
+                                    <td colspan="5">Chargement des plats...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="table-status" id="plats-table-status">
+                        Connexion a l'API en cours...
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="page-shell experience">
+                <div class="info-panel reveal">
+                    <div class="section-heading">
+                        <h2>Une salle qui vit.</h2>
+                        <p>
+                            La page parle autant du goût que de l'expérience : lumière chaude,
+                            cuisine ouverte et service pensé pour les repas qui prennent leur temps.
+                        </p>
+                    </div>
+
+                    <div class="info-stack">
+                        <article class="info-card">
+                            <strong>Adresse</strong>
+                            <p>24 rue des Épices, quartier central, terrasse ouverte dès 18h30.</p>
+                        </article>
+                        <article class="info-card">
+                            <strong>Horaires</strong>
+                            <p>Du mardi au dimanche, déjeuner 12h-14h30 et dîner 19h-23h.</p>
+                        </article>
+                        <article class="info-card">
+                            <strong>Ambiance</strong>
+                            <p>Banquettes basses, lumière miel, playlists discrètes et cuisine visible.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="booking-panel reveal" id="reservation">
+                    <h2>Réserver une table sans friction.</h2>
+                    <p>
+                        Une section finale pensée pour convertir : infos rapides, créneaux lisibles
+                        et appel à l'action immédiat.
+                    </p>
+
+                    <div class="booking-grid">
+                        <div class="booking-field">
+                            <small>Date</small>
+                            <strong>Ce soir</strong>
+                        </div>
+                        <div class="booking-field">
+                            <small>Créneau</small>
+                            <strong>20h30</strong>
+                        </div>
+                        <div class="booking-field">
+                            <small>Convives</small>
+                            <strong>2 à 6 personnes</strong>
+                        </div>
+                        <div class="booking-field">
+                            <small>Contact</small>
+                            <strong>+33 1 84 00 00 00</strong>
+                        </div>
+                    </div>
+
+                    <div class="booking-actions">
+                        <a class="button button-primary" href="mailto:reservation@maisontajine.fr">Réserver maintenant</a>
+                        <a class="button button-secondary" href="tel:+33184000000">Appeler le restaurant</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Maison Tajine, page food responsive en HTML/CSS.</span>
+            <span>Saveurs lentes, couleurs chaudes, structure pensée pour donner faim.</span>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll(".reveal");
+        const platsTableBody = document.querySelector("#plats-table-body");
+        const platsTableStatus = document.querySelector("#plats-table-status");
+
+        function getApiBaseUrl() {
+            if (window.location.protocol.startsWith("http")) {
+                return `${window.location.protocol}//${window.location.hostname}:3000`;
+            }
+
+            return "http://localhost:3000";
+        }
+
+        function formatPrice(price, currency) {
+            const amount = Number(price);
+
+            if (Number.isNaN(amount)) {
+                return `${price} ${currency || "EUR"}`;
+            }
+
+            return new Intl.NumberFormat("fr-FR", {
+                style: "currency",
+                currency: currency || "EUR"
+            }).format(amount);
+        }
+
+        function renderPlats(items) {
+            if (!items.length) {
+                platsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5">Aucun plat trouve dans la base.</td>
+                    </tr>
+                `;
+                platsTableStatus.textContent = "La base est joignable, mais aucun plat n'a ete retourne.";
+                platsTableStatus.classList.remove("is-error");
+                return;
+            }
+
+            platsTableBody.innerHTML = items.map((item) => `
+                <tr>
+                    <td>
+                        <strong>${item.name}</strong>
+                        <p>${item.description}</p>
+                    </td>
+                    <td>${item.meat}</td>
+                    <td>${formatPrice(item.price, item.currency)}</td>
+                    <td>${item.spiceLevel}/5</td>
+                    <td>
+                        <span class="table-badge ${item.isSignature ? "signature" : ""}">
+                            ${item.isSignature ? "Oui" : "Non"}
+                        </span>
+                    </td>
+                </tr>
+            `).join("");
+
+            platsTableStatus.textContent = `${items.length} plat(s) charges depuis l'API.`;
+            platsTableStatus.classList.remove("is-error");
+        }
+
+        async function loadPlats() {
+            try {
+                const response = await fetch(`${getApiBaseUrl()}/api/plats`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                renderPlats(Array.isArray(data.items) ? data.items : []);
+            } catch (error) {
+                platsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5">Impossible de charger les plats.</td>
+                    </tr>
+                `;
+                platsTableStatus.textContent = `Erreur API: ${error.message}`;
+                platsTableStatus.classList.add("is-error");
+            }
+        }
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach((element) => {
+                observer.observe(element);
+            });
+        } else {
+            revealElements.forEach((element) => {
+                element.classList.add("is-visible");
+            });
+        }
+
+        loadPlats();
+    </script>
+</body>
+</html>
