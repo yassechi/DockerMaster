@@ -1,0 +1,17 @@
+{
+  "name": "cars-api",
+  "version": "1.0.0",
+  "description": "Petit serveur Node pour des voitures.",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node server.ts"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
