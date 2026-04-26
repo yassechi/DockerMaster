@@ -1,0 +1,60 @@
+services:
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./web:/usr/share/nginx/html
+    networks:
+      - front-net
+
+
+  api:
+    build: 
+      context: ./api
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=tajinedb
+      - DB_USER=yass
+      - DB_PASSWORD=root
+    depends_on:
+      - db
+    networks:
+      - front-net
+      - back-net
+
+
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - mydata:/var/lib/postgresql
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=yass
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=tajinedb
+    networks:
+      - back-net
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://localhost:3001/api/plats"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  mydata:
+
+networks:
+  front-net:
+  back-net:
+
+
+

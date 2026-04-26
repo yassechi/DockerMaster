@@ -15,13 +15,16 @@ services:
       context: ./api
     ports:
       - "3001:3001"
-    environment:
-      - PORT=3001
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=tajinedb
-      - DB_USER=yass
-      - DB_PASSWORD=root
+    # environment:
+    #   - PORT=3001
+    #   - DB_HOST=db
+    #   - DB_PORT=5432
+    #   - DB_NAME=tajinedb
+    #   - DB_USER=yass
+    #   - DB_PASSWORD=root
+
+    # Load secrets
+    
     depends_on:
       - db
     networks:
@@ -49,6 +52,11 @@ volumes:
 networks:
   front-net:
   back-net:
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+
 
 
 
